@@ -1,40 +1,32 @@
 #include "main.h"
 /**
- * str_len - calculates length
- * @s - String
+ * _strlen_recursion - calculates length
+ * @s: String
  * Return: length of strin s
  */
-int str_len(char *s)
+int _strlen_recursion(char *s)
 {
-	int i = 0;
-
-	if (*s)
-	{
-		i = i + str_len(s + 1);
-		return (i += 1);
-	}
-	return (0);
+	if (*s == '\0')
+		return (0);
+	else
+		return (1 + _strlen_recursion(s + 1));
 }
 /**
- * str_help - helps more
- * @i: integer i
+ * comparator - helps more
+ * @n1: integer i
  * @s: string
+ * @n2: another integer
  * Return: int value
  */
-int str_help(int i, char *s)
+int comparator(char *s, int n1, int n2)
 {
-	if (*s)
+	if (*(s + n1) == *(s + n2))
 	{
-		if (*s != s[length(s) - i])
-		{
-			return (0);
-		}
-		else
-		{
-			return (str_help(i + 1, s + 1));
-		}
+		if (n1 == n2 || n1 == n2 + 1)
+			return (1);
+		return (0 + comparator(s, n1 + 1, n2 - 1));
 	}
-	return (1);
+	return (0);
 }
 /**
  * is_palindrome - returns 1 if a string is a palindrome and 0 if not
@@ -43,7 +35,7 @@ int str_help(int i, char *s)
  */
 int is_palindrome(char *s)
 {
-	int i = 1;
-
-	return (str_help(i, s));
+	if (*s == '\0')
+		return (1);
+	return (comparator(s, 0, _strlen_recursion(s) - 1));
 }
