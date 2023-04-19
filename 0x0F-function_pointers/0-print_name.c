@@ -6,6 +6,6 @@
  */
 void print_name(char *name, void (*f)(char *))
 {
-	char s = f(name);
-	_putchar("%s\n", s);
+	if (name != NULL && f != NULL)
+		f(name);
 }
