@@ -3,41 +3,41 @@
 #include <stdio.h>
 #include "variadic_functions.h"
 /**
- * print_ch - prints char
+ * print_c - prints char
  * @a: list to give
  * Return: always 0
  */
-int print_ch(va_list a)
+int print_c(va_list a)
 {
 	printf("%c", va_arg(a, int));
 	return (0);
 }
 /**
- * print_int - prints int
+ * print_i - prints int
  * @a: list to give
  * Return: always 0
  */
-int print_int(va_list a)
+int print_i(va_list a)
 {
 	printf("%d", va_arg(a, int));
 	return (0);
 }
 /**
- * print_float - prints float
+ * print_f - prints float
  * @a: list to give
  * Return: always 0
  */
-int print_float(va_list a)
+int print_f(va_list a)
 {
 	printf("%f", va_arg(a, double));
 	return (0);
 }
 /**
- * print_str - prints string
+ * print_s - prints string
  * @a: list to give
  * Return: always 0
  */
-int print_str(va_list a)
+int print_s(va_list a)
 {
 	char *s;
 
@@ -62,10 +62,10 @@ void print_all(const char * const format, ...)
 	char *sep2 = ", ";
 	va_list anyArgs;
 	printer ops[] = {
-		{"c", print_ch},
-		{"i", print_int},
-		{"s", print_str},
-		{"f", print_float},
+		{"c", print_c},
+		{"i", print_i},
+		{"s", print_s},
+		{"f", print_f},
 		{NULL, NULL}
 	};
 
