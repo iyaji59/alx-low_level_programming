@@ -17,17 +17,15 @@ typedef struct listint_s
 	struct listint_s *next;
 } listint_t;
 /**
- * struct list_s - linked list
+ * struct listp_s - linked list
  * @next: points to the next node
- * @len: length of str
- * @str: string
+ * @p: node pointer
  */
-typedef struct list_s
+typedef struct listp_s
 {
-	char *str;
-	unsigned int len;
-	struct list_s *next;
-} list_t;
+	void *p;
+	struct listp_s *next;
+} listp_t;
 
 size_t print_listint(const listint_t *h);
 size_t listint_len(const listint_t *h);
