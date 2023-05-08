@@ -7,43 +7,30 @@
  *
  * Return: numbers of letters printed. It fails, returns 0.
  */
-
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	if (filename == NULL)
-	{
-		return (0);
-	}
-	FILE *file = fopen(filename, "r");
+	int fd;
+	ssize_t nrd, nwr;
+	char *buf;
 
-	if (file == NULL)
-	{
+	if (!filename)
 		return (0);
-	}
-	char *buffer = (char *) malloc(letters * sizeof(char));
 
-	if (buffer == NULL)
-	{
-		fclose(file);
-		return (0);
-	}
-	ssize_t bytes_read = fread(buffer, sizeof(char), letters, file);
+	fd = open(filename, O_RDONLY);
 
-	if (bytes_read < 0)
-	{
-		free(buffer);
-		fclose(file);
+	if (fd == -1)
 		return (0);
-	}
-	ssize_t bytes_written = write(STDOUT_FILENO, buffer, bytes_read);
 
-	if (bytes_written < 0 || bytes_written != bytes_read)
-	{
-		free(buffer);
-		fclose(file);
+	buf = malloc(sizeof(char) * (letters));
+	if (!buf)
 		return (0);
-	}
-	free(buffer);
-	fclose(file);
-	return (bytes_written);
+
+	nrd = read(fd, buf, letters);
+	nwr = write(STDOUT_FILENO, buf, nrd);
+
+	close(fd);
+
+	free(buf);
+
+	return (nwr);
 }
